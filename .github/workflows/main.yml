@@ -28,6 +28,7 @@ jobs:
       - name: Build with Maven (Package)
         run: | 
           mvn -Dmaven.test.skip=true -Dmaven.test.failure.ignore clean package --file pom.xml
+          echo "Projeto sem Dockerfile antes de chamar a API, listagem de arquivos:"
           ls -a
 
       - name: Create Dockerfile ${{ fromJson(steps.values.outputs.content).name }} by API
@@ -46,7 +47,9 @@ jobs:
           echo "Headers: ${{ steps.requestService.outputs.headers }}"
           echo "Body: ${{ steps.requestService.outputs.body }}"   
           echo "${{ steps.requestService.outputs.body }}" > Dockerfile
+          echo "Diretório com Dockerfile gerado pela API, listagem de arquivos:"
           ls -a
+          echo "Lendo conteúdo do Dockerfile gerado pela API"
           cat Dockerfile
 
       - name: Build the Docker image
