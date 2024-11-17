@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: gendockerfile-api
+  mvc:
+    pathmatch:
+      matching-strategy: ant-path-matcher
+
+server:
+  servlet:
+    context-path: /gendockerfile/v1
+  port: ${PORT:8080}
+
+logging:
+  level:
+    root: info
+    org.springframework.web: info

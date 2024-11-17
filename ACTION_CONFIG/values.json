@@ -1,5 +1,5 @@
 {
-  "name": "name-of-application",
-  "version": "name-of-tag",
-  "java": 11
+  "name": "gendockerfile-api",
+  "version": "latest",
+  "java": 17
 }
