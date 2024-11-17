@@ -1,5 +1,5 @@
 {
   "name": "gendockerfile-api",
-  "version": "latest",
+  "version": "apicall",
   "java": 17
 }
