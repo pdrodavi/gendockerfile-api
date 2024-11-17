@@ -24,7 +24,7 @@ public class DockerfileController {
             case "11":
                 stringBuilder.append("FROM registry.access.redhat.com/ubi8/openjdk-11:1.20-2.1730773730\n");
                 stringBuilder.append("ARG JAR_FILE=target/*.jar\n");
-                stringBuilder.append("COPY ${JAR_FILE} /app/").append(name).append(".jar\n");
+                stringBuilder.append("COPY target/*.jar /app/").append(name).append(".jar\n");
                 stringBuilder.append("WORKDIR /app\n");
                 stringBuilder.append("EXPOSE 8080\n");
                 stringBuilder.append("ENTRYPOINT [\"java\", \"-jar\", \"").append(name).append(".jar\"]");
@@ -32,7 +32,7 @@ public class DockerfileController {
             case "17":
                 stringBuilder.append("FROM registry.access.redhat.com/ubi8/openjdk-17:1.20-2.1730773722\n");
                 stringBuilder.append("ARG JAR_FILE=target/*.jar\n");
-                stringBuilder.append("COPY ${JAR_FILE} /app/").append(name).append(".jar\n");
+                stringBuilder.append("COPY target/*.jar /app/").append(name).append(".jar\n");
                 stringBuilder.append("WORKDIR /app\n");
                 stringBuilder.append("EXPOSE 8080\n");
                 stringBuilder.append("ENTRYPOINT [\"java\", \"-jar\", \"").append(name).append(".jar\"]");
