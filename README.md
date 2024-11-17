@@ -1,1 +1,1 @@
-# build-publish-image-docker-action
+[![Build and Push Docker Image to Docker Hub](https://github.com/pdrodavi/gendockerfile-api/actions/workflows/main.yml/badge.svg)](https://github.com/pdrodavi/gendockerfile-api/actions/workflows/main.yml)
