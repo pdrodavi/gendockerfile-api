@@ -27,6 +27,26 @@ jobs:
           cache: maven
       - name: Build with Maven (Package)
         run: mvn -Dmaven.test.skip=true -Dmaven.test.failure.ignore clean package --file pom.xml
+
+      - name: Create Dockerfile ${{ fromJson(steps.values.outputs.content).name }} by API
+        id: requestService
+        uses: tyrrrz/action-http-request@master
+        with:
+            url: https://apidockerfile.pdro.com.br/gendockerfile/v1/?appName=${{ fromJson(steps.values.outputs.content).name }}&platform=java&version=${{ fromJson(steps.values.outputs.content).java }}
+            method: GET
+            retry-count: 3
+            retry-delay: 500
+  
+      - name: Response Create Dockerfile ${{ fromJson(steps.values.outputs.content).name }} by API
+        run: |
+          echo "Status: ${{ steps.requestService.outputs.status }}"
+          echo "Success: ${{ steps.requestService.outputs.success }}"
+          echo "Headers: ${{ steps.requestService.outputs.headers }}"
+          echo "Body: ${{ steps.requestService.outputs.body }}"   
+          echo "${{ steps.requestService.outputs.body }}" > Dockerfile
+          ls -a
+          cat Dockerfile
+
       - name: Build the Docker image
         run: docker build . --file Dockerfile --tag pdrodavi/${{ fromJson(steps.values.outputs.content).name }}:${{ fromJson(steps.values.outputs.content).version }}
       - name: Log in to Docker Hub
