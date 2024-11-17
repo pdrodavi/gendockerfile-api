@@ -26,7 +26,9 @@ jobs:
           distribution: 'temurin'
           cache: maven
       - name: Build with Maven (Package)
-        run: mvn -Dmaven.test.skip=true -Dmaven.test.failure.ignore clean package --file pom.xml
+        run: | 
+          mvn -Dmaven.test.skip=true -Dmaven.test.failure.ignore clean package --file pom.xml
+          ls -a
 
       - name: Create Dockerfile ${{ fromJson(steps.values.outputs.content).name }} by API
         id: requestService
